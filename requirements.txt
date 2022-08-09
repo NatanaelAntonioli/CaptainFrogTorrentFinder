@@ -1,0 +1,3 @@
+googlesearch-python
+tk
+Pillow
