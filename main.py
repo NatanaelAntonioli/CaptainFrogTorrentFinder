@@ -1,6 +1,7 @@
 from tkinter import *
 from torrent_search import *
 from PIL import ImageTk, Image
+import subprocess 
 
 handlers = []
 
@@ -19,7 +20,12 @@ def clicked():
 def listbox_clicked(event):
     cs = listbox.curselection()
     for list in cs:
-        os.startfile(handlers[list][1])
+        # Checar se é windows ou unix-like
+        if os.name == 'nt': # windows
+            os.startfile(handlers[list][1])
+        else: # linux com xdg-open
+            subprocess.call(['xdg-open', handlers[list][1]])
+            
 
 global_offset = 130
 x_offset_adjust = 23
