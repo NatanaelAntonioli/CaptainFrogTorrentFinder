@@ -3,6 +3,7 @@ import re
 from googlesearch import search
 import time
 import os
+from tkinter.messagebox import showerror
 
 # Configurações iniciais
 
@@ -98,7 +99,9 @@ def get_list_of_torrents(provedores, termo):
             except:
                 print("Erro na página " + j)
     except:
-        print("Erro ao fazer novas requests")
+        print("Erro ao fazer algumas novas requests, aguarde alguns minutos")
+        showerror(title="Erro", message="Erro ao fazer algumas novas requests, aguarde alguns minutos")
+        
 
     return lista_magnets_main + lista_magnets_second + lista_magnets_google
 
