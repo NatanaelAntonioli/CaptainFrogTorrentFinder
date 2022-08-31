@@ -3,6 +3,7 @@ import re
 from googlesearch import search
 import time
 import os
+from tkinter.messagebox import showerror
 
 # Configurações iniciais
 
@@ -76,26 +77,32 @@ def get_list_of_torrents(provedores, termo):
             print("Erro no provedor " + prov)
 
     query = termo + '"magnet"'
-    for j in search(query):
-        try:
-            req = Request(j, headers={'User-Agent': 'Sapo'})
-            webpage = urlopen(req).read()
+    try:
+        for j in search(query):
+            try:
+                req = Request(j, headers={'User-Agent': 'Sapo'})
+                webpage = urlopen(req).read()
 
-            texto_pagina = webpage.decode('ISO-8859-1')
+                texto_pagina = webpage.decode('ISO-8859-1')
 
-            lista_split = texto_pagina.split('"')[1:-1]
+                lista_split = texto_pagina.split('"')[1:-1]
 
-            for i in (lista_split):
-                if "magnet:?" in i:
-                    pure = i
-                    i = i.replace("&#", "=")
-                    i = i.replace("x3D;", "")
-                    i = i.replace("amp;", "")
+                for i in (lista_split):
+                    if "magnet:?" in i:
+                        pure = i
+                        i = i.replace("&#", "=")
+                        i = i.replace("x3D;", "")
+                        i = i.replace("amp;", "")
 
-                    if i not in lista_magnets_main and i not in lista_magnets_second and verify_magnet_link(i):
-                        lista_magnets_google.append([i, i, "G"])
-        except:
-            print("Erro na página " + j)
+                        if i not in lista_magnets_main and i not in lista_magnets_second and verify_magnet_link(i):
+                            lista_magnets_google.append([i, i, "G"])
+            except:
+                print("Erro na página " + j)
+    except:
+        print("Erro ao fazer algumas novas requests, aguarde alguns minutos")
+        showerror(title="Erro", message="Erro ao fazer algumas novas requests, aguarde alguns minutos")
+        
+
     return lista_magnets_main + lista_magnets_second + lista_magnets_google
 
 # Recebe uma tupla [magnet, magnet, rating] e devolve uma tupla [nome, magnet, rating]
