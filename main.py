@@ -19,7 +19,13 @@ def clicked():
 def listbox_clicked(event):
     cs = listbox.curselection()
     for list in cs:
-        os.startfile(handlers[list][1])
+        platform = os.sys.platform
+        if platform == 'linux':
+            opener = 'xdg-open'
+        elif platform == 'darwin':
+            opener = 'open'
+            
+        os.startfile(handlers[list][1]) if platform == 'win32' else os.system(f'{opener} {handlers[list][1]}')
 
 global_offset = 130
 x_offset_adjust = 23
