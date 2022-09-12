@@ -16,6 +16,9 @@ def clicked():
         #titulo_buscar.grid(column=1, row=i)
         listbox.insert(END, str(handlers[i][2]) + " | " + str(handlers[i][0]))
 
+        if (listbox.size()>22):
+            scrollbar.place(x=757, y=180, height=400)
+
 def listbox_clicked(event):
     cs = listbox.curselection()
     for list in cs:
@@ -32,20 +35,25 @@ window.geometry('800x600')
 
 # Define o termo de busca
 titulo_buscar = Label(window, text="Insert search term: ")
-titulo_buscar.place(x=10 + x_offset_adjust, y=10 + global_offset, in_=window)
+titulo_buscar.place(x=10 + x_offset_adjust, y=12 + global_offset, in_=window)
 
 # Define o campo onde recebemos o input
 inputtxt = Text(window, height=1, width=50)
-inputtxt.place(x=130 + x_offset_adjust, y=13 + global_offset, in_=window)
+inputtxt.place(x=145 + x_offset_adjust, y=13 + global_offset, in_=window)
 
 # Define o botão
 btn = Button(window, text="Search!", command=clicked)
-btn.place(x=550 + x_offset_adjust, y=9 + global_offset, in_=window)
+btn.place(x=560 + x_offset_adjust, y=9 + global_offset, in_=window)
 
 # Define a listbox
-listbox = Listbox(window, height=25, width=120)
+listbox = Listbox(window, height=22, width=92)
 listbox.place(x=30, y=50 + global_offset, in_=window)
 listbox.bind('<Double-1>', listbox_clicked)
+
+# Define a scrollbar da listbox
+scrollbar = Scrollbar(window, orient='vertical')
+scrollbar.config(command=listbox.yview)
+listbox.config(yscrollcommand=scrollbar.set)
 
 # Define a imagem do sapo
 frame = Frame(window, width=20, height=10)
