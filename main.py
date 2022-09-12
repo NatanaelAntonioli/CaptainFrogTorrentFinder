@@ -43,7 +43,7 @@ btn = Button(window, text="Search!", command=clicked)
 btn.place(x=550 + x_offset_adjust, y=9 + global_offset, in_=window)
 
 # Define a listbox
-listbox = Listbox(window, height=25, width=120)
+listbox = Listbox(window, height=22, width=92)
 listbox.place(x=30, y=50 + global_offset, in_=window)
 listbox.bind('<Double-1>', listbox_clicked)
 
