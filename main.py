@@ -1,9 +1,13 @@
 from tkinter import *
 from torrent_search import *
 from PIL import ImageTk, Image
-
+from concurrent import futures
 handlers = []
 
+
+def thread_clicked(): #Avoid Tkinter freeze
+    thread_pool_executor = futures.ThreadPoolExecutor(max_workers=1)
+    thread_pool_executor.submit(clicked)
 
 def clicked():
     inp = inputtxt.get(1.0, "end-1c")
@@ -39,7 +43,7 @@ inputtxt = Text(window, height=1, width=50)
 inputtxt.place(x=130 + x_offset_adjust, y=13 + global_offset, in_=window)
 
 # Define o botão
-btn = Button(window, text="Search!", command=clicked)
+btn = Button(window, text="Search!", command=thread_clicked)
 btn.place(x=550 + x_offset_adjust, y=9 + global_offset, in_=window)
 
 # Define a listbox
