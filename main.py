@@ -16,6 +16,9 @@ def clicked():
         #titulo_buscar.grid(column=1, row=i)
         listbox.insert(END, str(handlers[i][2]) + " | " + str(handlers[i][0]))
 
+        if (listbox.size()>22):
+            scrollbar.place(x=757, y=180, height=400)
+
 def listbox_clicked(event):
     cs = listbox.curselection()
     for list in cs:
@@ -46,6 +49,11 @@ btn.place(x=550 + x_offset_adjust, y=9 + global_offset, in_=window)
 listbox = Listbox(window, height=22, width=92)
 listbox.place(x=30, y=50 + global_offset, in_=window)
 listbox.bind('<Double-1>', listbox_clicked)
+
+# Define a scrollbar da listbox
+scrollbar = Scrollbar(window, orient='vertical')
+scrollbar.config(command=listbox.yview)
+listbox.config(yscrollcommand=scrollbar.set)
 
 # Define a imagem do sapo
 frame = Frame(window, width=20, height=10)
