@@ -35,15 +35,15 @@ window.geometry('800x600')
 
 # Define o termo de busca
 titulo_buscar = Label(window, text="Insert search term: ")
-titulo_buscar.place(x=10 + x_offset_adjust, y=10 + global_offset, in_=window)
+titulo_buscar.place(x=10 + x_offset_adjust, y=12 + global_offset, in_=window)
 
 # Define o campo onde recebemos o input
 inputtxt = Text(window, height=1, width=50)
-inputtxt.place(x=130 + x_offset_adjust, y=13 + global_offset, in_=window)
+inputtxt.place(x=145 + x_offset_adjust, y=13 + global_offset, in_=window)
 
 # Define o botão
 btn = Button(window, text="Search!", command=clicked)
-btn.place(x=550 + x_offset_adjust, y=9 + global_offset, in_=window)
+btn.place(x=560 + x_offset_adjust, y=9 + global_offset, in_=window)
 
 # Define a listbox
 listbox = Listbox(window, height=22, width=92)
